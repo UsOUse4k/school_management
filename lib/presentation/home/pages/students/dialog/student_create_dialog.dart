@@ -8,6 +8,7 @@ import 'package:school_management/application/fee_discounts/create_fee_discount/
 import 'package:school_management/application/fees/create_fee/create_fee_cubit.dart';
 import 'package:school_management/application/full_students/create_full_student/create_full_student_cubit.dart';
 import 'package:school_management/application/students/create_student/create_student_cubit.dart';
+import 'package:school_management/application/students/get_students/students_cubit.dart';
 import 'package:school_management/presentation/common/constants/styles.dart';
 import 'package:school_management/presentation/common/utils/content_item.dart';
 import 'package:school_management/presentation/common/widgets/custom_dialog_button.dart';
@@ -34,6 +35,8 @@ class StudentCreateDialog extends HookWidget {
               (either) => either.fold(
                 (_) {},
                 (_) {
+                  context.read<CreateFullStudentCubit>().resetFields();
+                  // context.read<StudentsCubit>().getStudents();
                   context.pop();
                 },
               ),

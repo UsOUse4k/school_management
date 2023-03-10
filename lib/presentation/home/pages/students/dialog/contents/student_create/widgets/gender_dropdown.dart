@@ -6,9 +6,10 @@ import 'package:school_management/presentation/common/constants/decorations.dart
 import 'package:school_management/presentation/common/constants/styles.dart';
 
 class GenderDropdown extends StatefulWidget {
-  final Function(String)? onChanged;
+  final Function(Gender)? onChanged;
+  final String? initialValue;
 
-  const GenderDropdown({super.key, this.onChanged});
+  const GenderDropdown({super.key, this.onChanged, this.initialValue});
 
   @override
   createState() => _GenderDropdownState();
@@ -40,7 +41,11 @@ class _GenderDropdownState extends State<GenderDropdown> {
               Padding(
                 padding: const EdgeInsets.only(top: 5.19, left: 7.98),
                 child: Text(
-                  gender ?? "Пол",
+                  gender ??
+                      (widget.initialValue != null &&
+                              widget.initialValue!.isNotEmpty
+                          ? widget.initialValue!
+                          : "Пол"),
                   style: kCreateDropdownTextStyle,
                 ),
               ),
@@ -94,7 +99,7 @@ class _GenderDropdownState extends State<GenderDropdown> {
                             child: InkWell(
                               onTap: () {
                                 gender = Gender.female.title;
-                                widget.onChanged?.call(Gender.female.name);
+                                widget.onChanged?.call(Gender.female);
                                 _toggleDropdown(close: true);
                               },
                               child: Row(
@@ -126,7 +131,7 @@ class _GenderDropdownState extends State<GenderDropdown> {
                             child: InkWell(
                               onTap: () {
                                 gender = Gender.male.title;
-                                widget.onChanged?.call(Gender.male.name);
+                                widget.onChanged?.call(Gender.male);
                                 _toggleDropdown(close: true);
                               },
                               child: Row(

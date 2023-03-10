@@ -7,13 +7,21 @@ import 'package:school_management/presentation/common/constants/styles.dart';
 
 class CustomDateField extends HookWidget {
   final String? hintText;
+  final String? initialValue;
   final Function(String)? onChanged;
 
-  const CustomDateField({super.key, this.hintText, this.onChanged});
+  const CustomDateField({
+    super.key,
+    this.hintText,
+    this.initialValue,
+    this.onChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
     final controller = useTextEditingController();
+
+    controller.text = initialValue ?? controller.text;
 
     return Container(
       height: 23.95,

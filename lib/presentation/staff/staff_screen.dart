@@ -3,6 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:school_management/application/accruals/create_accrual/create_accrual_cubit.dart';
 import 'package:school_management/application/accruals/get_accruals/accruals_cubit.dart';
+import 'package:school_management/application/salary_payments/create_salary_payment/create_salary_payment_cubit.dart';
+import 'package:school_management/application/salary_payments/get_salary_payments/salary_payments_cubit.dart';
 import 'package:school_management/injectable.dart';
 import 'package:school_management/presentation/common/constants/colors.dart';
 import 'package:school_management/presentation/common/utils/content_item.dart';
@@ -40,10 +42,10 @@ class StaffScreen extends StatelessWidget {
         content: MultiBlocProvider(
           providers: [
             BlocProvider(
-              create: (context) => getIt<AccrualsCubit>(),
+              create: (context) => getIt<SalaryPaymentsCubit>(),
             ),
             BlocProvider(
-              create: (context) => getIt<CreateAccrualCubit>(),
+              create: (context) => getIt<CreateSalaryPaymentCubit>(),
             ),
           ],
           child: const PaymentsContent(),

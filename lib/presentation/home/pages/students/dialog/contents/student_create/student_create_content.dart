@@ -51,6 +51,8 @@ class StudentCreateContent extends StatelessWidget {
               children: [
                 CustomFormField(
                   hintText: "Имя",
+                  initialValue:
+                      context.read<CreateStudentCubit>().state.firstName,
                   onChanged: (value) {
                     context.read<CreateStudentCubit>().firstNameChanged(value);
                   },
@@ -58,6 +60,8 @@ class StudentCreateContent extends StatelessWidget {
                 const SizedBox(height: 20.05),
                 CustomFormField(
                   hintText: "Фамилия",
+                  initialValue:
+                      context.read<CreateStudentCubit>().state.lastName,
                   onChanged: (value) {
                     context.read<CreateStudentCubit>().lastNameChanged(value);
                   },
@@ -65,6 +69,8 @@ class StudentCreateContent extends StatelessWidget {
                 const SizedBox(height: 20.05),
                 CustomFormField(
                   hintText: "Отчество",
+                  initialValue:
+                      context.read<CreateStudentCubit>().state.patronymic,
                   onChanged: (value) {
                     context.read<CreateStudentCubit>().patrynomicChanged(value);
                   },
@@ -72,6 +78,8 @@ class StudentCreateContent extends StatelessWidget {
                 const SizedBox(height: 21.05),
                 CustomDateField(
                   hintText: "Дата рождения (день/месяц/год)",
+                  initialValue:
+                      context.read<CreateStudentCubit>().state.birthday,
                   onChanged: (value) {
                     context.read<CreateStudentCubit>().birthdayChanged(value);
                   },
@@ -81,19 +89,25 @@ class StudentCreateContent extends StatelessWidget {
             const SizedBox(width: 12.5),
             Column(
               children: [
-                GenderDropdown(
-                  onChanged: (value) {
-                    context.read<CreateStudentCubit>().genderChanged(value);
-                  },
+GenderDropdown(
+                      // initialValue: state.value,
+                      onChanged: (value) {
+                        context
+                            .read<CreateStudentCubit>()
+                            .genderChanged(value.name);
+                      },
                 ),
                 const SizedBox(height: 20.05),
                 GroupDropdown(
+                  initialValue: context.read<CreateStudentCubit>().state.group,
                   onChanged: (value) {
                     context.read<CreateStudentCubit>().groupChanged(value);
                   },
                 ),
                 const SizedBox(height: 20.05),
                 AdmissionYearDropdown(
+                  initialValue:
+                      context.read<CreateStudentCubit>().state.admissionYear,
                   onChanged: (value) {
                     context
                         .read<CreateStudentCubit>()

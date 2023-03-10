@@ -5,9 +5,15 @@ import 'package:school_management/presentation/common/constants/styles.dart';
 
 class CustomFormField extends StatelessWidget {
   final String? hintText;
+  final String? initialValue;
   final Function(String)? onChanged;
 
-  const CustomFormField({super.key, this.hintText, this.onChanged});
+  const CustomFormField({
+    super.key,
+    this.hintText,
+    this.initialValue,
+    this.onChanged,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,6 +22,8 @@ class CustomFormField extends StatelessWidget {
       constraints: const BoxConstraints(maxWidth: 239.5),
       decoration: kCreateFormDecoration,
       child: TextFormField(
+        
+        initialValue: initialValue,
         onChanged: onChanged,
         decoration: InputDecoration(
           isDense: true,

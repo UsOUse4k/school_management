@@ -7,9 +7,10 @@ import 'package:school_management/presentation/common/constants/decorations.dart
 import 'package:school_management/presentation/common/constants/styles.dart';
 
 class GroupDropdown extends StatefulWidget {
+  final int? initialValue;
   final Function(int)? onChanged;
 
-  const GroupDropdown({super.key, this.onChanged});
+  const GroupDropdown({super.key, this.onChanged, this.initialValue});
 
   @override
   createState() => _GroupDropdownState();

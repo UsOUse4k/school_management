@@ -7,9 +7,10 @@ import 'package:school_management/presentation/common/constants/decorations.dart
 import 'package:school_management/presentation/common/constants/styles.dart';
 
 class AdmissionYearDropdown extends StatefulWidget {
+  final String? initialValue;
   final Function(String)? onChanged;
 
-  const AdmissionYearDropdown({super.key, this.onChanged});
+  const AdmissionYearDropdown({super.key, this.onChanged, this.initialValue});
 
   @override
   createState() => _AdmissionYearDropdownState();
@@ -47,7 +48,11 @@ class _AdmissionYearDropdownState extends State<AdmissionYearDropdown> {
                   Padding(
                     padding: const EdgeInsets.only(top: 5.19, left: 7.98),
                     child: Text(
-                      title ?? "Год поступления",
+                      title ??
+                          (widget.initialValue != null &&
+                                  widget.initialValue!.isNotEmpty
+                              ? widget.initialValue!
+                              : "Год поступления"),
                       style: kCreateDropdownTextStyle,
                     ),
                   ),

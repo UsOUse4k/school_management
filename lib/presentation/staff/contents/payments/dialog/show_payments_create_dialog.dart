@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:school_management/application/accruals/create_accrual/create_accrual_cubit.dart';
+import 'package:school_management/application/salary_payments/create_salary_payment/create_salary_payment_cubit.dart';
 import 'package:school_management/application/staffs/get_staff/staff_cubit.dart';
 import 'package:school_management/presentation/common/constants/colors.dart';
-import 'package:school_management/presentation/staff/contents/accruals/dialog/accrual_create_dialog.dart';
+import 'package:school_management/presentation/staff/contents/payments/dialog/payments_create_dialog.dart';
 
-void showAccrualCreateDialog(BuildContext context) {
+void showPaymentsCreateDialog(BuildContext context) {
   showDialog(
     context: context,
     builder: (_) {
       return MultiBlocProvider(
         providers: [
           BlocProvider.value(
-            value: context.read<CreateAccrualCubit>(),
+            value: context.read<CreateSalaryPaymentCubit>(),
           ),
           BlocProvider.value(
             value: context.read<StaffCubit>(),
@@ -26,7 +26,7 @@ void showAccrualCreateDialog(BuildContext context) {
           child: BlocBuilder<StaffCubit, StaffState>(
             builder: (_, state) => state.maybeMap(
               loadSuccess: (state) =>
-                  AccrualCreateDialog(staffId: state.staff.id),
+                  PaymentsCreateDialog(staffId: state.staff.id),
               orElse: () => const SizedBox.shrink(),
             ),
           ),

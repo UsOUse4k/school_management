@@ -2,32 +2,30 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:school_management/application/accruals/create_accrual/create_accrual_cubit.dart';
-import 'package:school_management/application/accruals/get_accruals/accruals_cubit.dart';
+import 'package:school_management/application/salary_payments/create_salary_payment/create_salary_payment_cubit.dart';
 import 'package:school_management/presentation/common/constants/colors.dart';
 import 'package:school_management/presentation/common/constants/styles.dart';
 import 'package:school_management/presentation/common/widgets/custom_dialog_button.dart';
 import 'package:school_management/presentation/common/widgets/custom_table.dart';
-import 'package:school_management/presentation/staff/contents/accruals/dialog/widgets/currency_dropdown.dart';
+import 'package:school_management/presentation/staff/contents/payments/dialog/widgets/currency_dropdown.dart';
 
-class AccrualCreateDialog extends StatelessWidget {
+class PaymentsCreateDialog extends StatelessWidget {
   final int staffId;
 
-  const AccrualCreateDialog({super.key, required this.staffId});
+  const PaymentsCreateDialog({super.key, required this.staffId});
 
   @override
   Widget build(BuildContext context) {
-    context.read<CreateAccrualCubit>().staffIdChanged(staffId);
+    context.read<CreateSalaryPaymentCubit>().staffIdChanged(staffId);
 
-    return BlocListener<CreateAccrualCubit, CreateAccrualState>(
+    return BlocListener<CreateSalaryPaymentCubit, CreateSalaryPaymentState>(
       listener: (_, state) {
-        state.accrualFailureOrSuccessOption.fold(
+        state.salaryPaymentFailureOrSuccessOption.fold(
           () {},
           (either) {
             either.fold(
               (_) {},
               (_) {
-                context.read<AccrualsCubit>().getAccruals(staffId);
                 context.pop();
               },
             );
@@ -41,7 +39,7 @@ class AccrualCreateDialog extends StatelessWidget {
           children: [
             const SizedBox(height: 17),
             Text(
-              "Начисления".toUpperCase(),
+              "Выплаты".toUpperCase(),
               style: kDialogTitleStyle,
             ),
             const SizedBox(height: 37),
@@ -74,14 +72,14 @@ class AccrualCreateDialog extends StatelessWidget {
                     CustomTableCell(
                       child: TextFormField(
                         onChanged: (value) {
-                          context.read<CreateAccrualCubit>().noteChanged(value);
+                          context
+                              .read<CreateSalaryPaymentCubit>()
+                              .noteChanged(value);
                         },
                         cursorColor: kPrimaryColor,
                         cursorHeight: 15,
                         cursorWidth: 1.5,
                         decoration: const InputDecoration(
-                          isDense: true,
-                          contentPadding: EdgeInsets.only(top: 2),
                           border: InputBorder.none,
                         ),
                         style: GoogleFonts.nunito(
@@ -102,7 +100,7 @@ class AccrualCreateDialog extends StatelessWidget {
                         child: CurrencyDropdown(
                           onChanged: (value) {
                             context
-                                .read<CreateAccrualCubit>()
+                                .read<CreateSalaryPaymentCubit>()
                                 .currencyChanged(value);
                           },
                         ),
@@ -112,15 +110,13 @@ class AccrualCreateDialog extends StatelessWidget {
                       child: TextFormField(
                         onChanged: (value) {
                           context
-                              .read<CreateAccrualCubit>()
+                              .read<CreateSalaryPaymentCubit>()
                               .amountChanged(double.parse(value));
                         },
                         cursorColor: kPrimaryColor,
                         cursorHeight: 15,
                         cursorWidth: 1.5,
                         decoration: const InputDecoration(
-                          isDense: true,
-                          contentPadding: EdgeInsets.only(top: 2),
                           border: InputBorder.none,
                         ),
                         style: GoogleFonts.nunito(
@@ -138,7 +134,7 @@ class AccrualCreateDialog extends StatelessWidget {
             CustomDialogButton(
               text: "Добавить",
               onTap: () {
-                context.read<CreateAccrualCubit>().addButtonPressed();
+                context.read<CreateSalaryPaymentCubit>().addButtonPressed();
               },
             ),
             const SizedBox(height: 23),

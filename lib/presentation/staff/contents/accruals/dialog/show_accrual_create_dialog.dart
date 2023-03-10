@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:school_management/application/accruals/create_accrual/create_accrual_cubit.dart';
+import 'package:school_management/application/accruals/get_accruals/accruals_cubit.dart';
 import 'package:school_management/application/staffs/get_staff/staff_cubit.dart';
 import 'package:school_management/presentation/common/constants/colors.dart';
 import 'package:school_management/presentation/staff/contents/accruals/dialog/accrual_create_dialog.dart';
@@ -13,6 +14,9 @@ void showAccrualCreateDialog(BuildContext context) {
         providers: [
           BlocProvider.value(
             value: context.read<CreateAccrualCubit>(),
+          ),
+          BlocProvider.value(
+            value: context.read<AccrualsCubit>(),
           ),
           BlocProvider.value(
             value: context.read<StaffCubit>(),

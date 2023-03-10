@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:school_management/application/accruals/get_accruals/accruals_cubit.dart';
+import 'package:school_management/application/salary_payments/get_salary_payments/salary_payments_cubit.dart';
 import 'package:school_management/presentation/common/constants/colors.dart';
 import 'package:school_management/presentation/common/constants/styles.dart';
 import 'package:school_management/presentation/common/widgets/custom_table_row.dart';
@@ -20,7 +20,7 @@ class PaymentsLayout extends StatelessWidget {
       5: const FlexColumnWidth(139),
     };
 
-    return BlocBuilder<AccrualsCubit, AccrualsState>(
+    return BlocBuilder<SalaryPaymentsCubit, SalaryPaymentsState>(
       builder: (_, state) => state.maybeMap(
         loadSuccess: (state) => Container(
           height: 614,
@@ -42,13 +42,13 @@ class PaymentsLayout extends StatelessWidget {
                   getTableHeader("Сумма"),
                 ],
               ),
-              state.accruals.isNotEmpty
+              state.salaryPayments.isNotEmpty
                   ? ListView.builder(
                       shrinkWrap: true,
-                      itemCount: state.accruals.length,
+                      itemCount: state.salaryPayments.length,
                       itemBuilder: (_, index) => PaymentRow(
                         widths: widths,
-                        accrual: state.accruals[index],
+                        salaryPayment: state.salaryPayments[index],
                       ),
                     )
                   : Expanded(

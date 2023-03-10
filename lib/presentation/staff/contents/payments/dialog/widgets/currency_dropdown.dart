@@ -64,6 +64,7 @@ class _CurrencyDropdownState extends State<CurrencyDropdown> {
                   currency ?? "Фильтр",
                   style: GoogleFonts.nunito(
                     color: kPrimaryColor,
+                    
                   ),
                 ),
               ),

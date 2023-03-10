@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:school_management/application/accruals/get_accruals/accruals_cubit.dart';
+import 'package:school_management/application/salary_payments/get_salary_payments/salary_payments_cubit.dart';
 import 'package:school_management/application/staffs/get_staff/staff_cubit.dart';
 import 'package:school_management/gen/assets.gen.dart';
 import 'package:school_management/presentation/common/constants/colors.dart';
 import 'package:school_management/presentation/common/constants/shadows.dart';
 import 'package:school_management/presentation/common/widgets/add_button.dart';
+import 'package:school_management/presentation/staff/contents/payments/dialog/show_payments_create_dialog.dart';
 import 'package:school_management/presentation/staff/contents/payments/payments_layout.dart';
 import 'package:school_management/presentation/staff/custom_date_field.dart';
 
@@ -120,7 +121,9 @@ class PaymentsContent extends StatelessWidget {
           ),
           const SizedBox(height: 62),
           AddButton(
-            onTap: () {},
+            onTap: () {
+              showPaymentsCreateDialog(context);
+            },
           ),
           const SizedBox(height: 62),
           BlocBuilder<StaffCubit, StaffState>(
@@ -128,7 +131,7 @@ class PaymentsContent extends StatelessWidget {
               loadSuccess: (state) {
                 final staffId = state.staff.id;
 
-                context.read<AccrualsCubit>().getAccruals(staffId);
+                context.read<SalaryPaymentsCubit>().getSalaryPayments(staffId);
 
                 return ConstrainedBox(
                   constraints: const BoxConstraints(maxWidth: 980),
